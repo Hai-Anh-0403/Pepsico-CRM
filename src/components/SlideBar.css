@@ -1,0 +1,74 @@
+.sidebar {
+    width: 260px;
+    background-color: #0046be;
+    /* Màu xanh Pepsi đậm hơn chút cho sang */
+    color: white;
+    min-height: 100vh;
+    padding: 20px 15px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    padding: 10px 15px 30px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 8px;
+    /* Tạo khoảng cách giữa các item */
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 12px 15px;
+    text-decoration: none;
+    border-radius: 12px;
+    /* Bo góc hiện đại */
+    transition: all 0.3s ease;
+}
+
+.nav-link .icon {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link .label {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Hiệu ứng Hover */
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: translateX(5px);
+    /* Nhích nhẹ sang phải khi hover */
+}
+
+/* Trạng thái Active */
+.nav-link.active {
+    background-color: #ffffff;
+    color: #0046be;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link.active .icon {
+    color: #0046be;
+}

@@ -1,0 +1,127 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.crm-container {
+    display: flex;
+    height: 80vh;
+    background: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.crm-sidebar {
+    width: 250px;
+    background: #004b91;
+    color: white;
+    padding: 20px;
+}
+
+.crm-sidebar button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.crm-sidebar button.active {
+    background: #ffffff;
+    color: #004b91;
+    font-weight: bold;
+}
+
+.crm-main-content {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.chat-window {
+    flex: 2;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.chat-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+.message-item {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.message-item.user {
+    justify-content: flex-end;
+}
+
+.message-item.bot {
+    justify-content: flex-start;
+}
+
+.bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 70%;
+}
+
+.user .bubble {
+    background: #004b91;
+    color: white;
+}
+
+.bot .bubble {
+    background: #e4e6eb;
+    color: #333;
+}
+
+.chat-footer {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+.automation-panel {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.send-btn {
+    background-color: #004b91;
+    color: #ffffff;
+}
+
+.status-online {
+    color: #0dbd0d;
+    font-weight: bold;
+}

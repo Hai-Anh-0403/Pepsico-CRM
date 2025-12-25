@@ -1,0 +1,88 @@
+/* Container chính */
+.settings-container {
+    padding: 24px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.settings-header {
+    margin-bottom: 30px;
+    color: #0046be;
+    /* Màu xanh Pepsi */
+}
+
+/* Bố cục chia hai cột */
+.settings-content {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+}
+
+/* Menu bên trái */
+.settings-nav {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #dee2e6;
+}
+
+.nav-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 8px 0 0 8px;
+    transition: 0.3s;
+    color: #495057;
+}
+
+.nav-item.active {
+    background-color: #e7f0ff;
+    color: #0046be;
+    font-weight: bold;
+    border-right: 3px solid #0046be;
+}
+
+/* Form cài đặt bên phải */
+.settings-form {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #0046be;
+}
+
+/* Nút bấm */
+.btn-save {
+    background-color: #0046be;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-save:hover {
+    background-color: #00328a;
+}
