@@ -1,38 +1,48 @@
+// Sidebar.jsx
 import "./SlideBar.css";
 import { NavLink } from "react-router-dom";
-// Nếu bạn cài lucide-react, hãy dùng các icon này:
-import { LayoutDashboard, Users, ShoppingCart, Headset, MessageSquare, BarChart3, Settings } from 'lucide-react';
+import Logo from "../assets/img/P.png";
+import { LayoutDashboard, Users, ShoppingCart, Headset, MessageSquare, BarChart3, Settings, ChevronRight, Earth } from 'lucide-react';
+
+const menuItems = [
+    { path: "/", label: "Dashboard", icon: LayoutDashboard },
+    { path: "/client", label: "Khách hàng", icon: Users },
+    { path: "/buy", label: "Bán Hàng", icon: ShoppingCart },
+    { path: "/customerservice", label: "CSKH", icon: Headset },
+    { path: "/ai", label: "AI & Chat", icon: MessageSquare },
+    { path: "/report", label: "Báo cáo", icon: BarChart3 },
+    { path: "/setting", label: "Cài đặt", icon: Settings },
+];
 
 const SlideBar = () => {
-    const menuItems = [
-        { path: "/", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
-        { path: "/client", label: "Khách hàng", icon: <Users size={20} /> },
-        { path: "/buy", label: "Bán Hàng", icon: <ShoppingCart size={20} /> },
-        { path: "/customerservice", label: "CSKH", icon: <Headset size={20} /> },
-        { path: "/ai", label: "AI & Chat", icon: <MessageSquare size={20} /> },
-        { path: "/report", label: "Báo cáo", icon: <BarChart3 size={20} /> },
-        { path: "/setting", label: "Cài đặt", icon: <Settings size={20} /> },
-    ];
-
     return (
-        <div className="sidebar">
+        <aside className="sidebar">
             <div className="sidebar-header">
-                <h2>PepsiCo CRM</h2>
+                <NavLink to="/" className="logo-link">
+                    <Earth size={30} />
+                    <h4 className="logo-title"> Pepsico</h4>
+                </NavLink>
             </div>
-            <ul className="sidebar-menu">
+
+            <nav className="sidebar-menu">
                 {menuItems.map((item) => (
-                    <li key={item.path}>
-                        <NavLink
-                            to={item.path}
-                            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-                        >
-                            <span className="icon">{item.icon}</span>
-                            <span className="label">{item.label}</span>
-                        </NavLink>
-                    </li>
+                    <NavLink
+                        key={item.path}
+                        to={item.path}
+                        className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                    >
+                        {/* Render Component Icon động */}
+                        <item.icon className="icon" size={22} strokeWidth={2} />
+                        <span className="label">{item.label}</span>
+                        <ChevronRight className="arrow-icon" size={14} />
+                    </NavLink>
                 ))}
-            </ul>
-        </div>
+            </nav>
+
+            <div className="sidebar-footer">
+                <p>© 2025 PepsiCo Digital</p>
+            </div>
+        </aside>
     );
 }
 

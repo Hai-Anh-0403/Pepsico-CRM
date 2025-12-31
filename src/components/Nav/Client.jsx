@@ -1,3 +1,4 @@
+import React from 'react';
 import "./Client.css";
 import {
     UserPlus,
@@ -6,91 +7,104 @@ import {
     Pencil,
     Trash2,
     MoreVertical,
-    Mail,
-    Phone
+    Download,
+    ChevronRight
 } from 'lucide-react';
+const customers = [
+    { id: 1, name: "Nguyễn Văn A", company: "PepsiCo", phone: "0901 234 567", email: "vana@pepsico.com", revenue: 120000000, status: "active", statusText: "Đang hoạt động" },
+    { id: 2, name: "Trần Thị B", company: "Coca-Cola", phone: "0912 345 678", email: "thib@cocacola.com", revenue: 85000000, status: "potential", statusText: "Tiềm năng" },
+    { id: 3, name: "Lê Văn C", company: "Nestlé", phone: "0987 654 321", email: "vanc@nestle.com", revenue: 45000000, status: "stopped", statusText: "Ngừng giao dịch" },
+];
+
 const Client = () => {
-    const customers = [
-        {
-            id: 1,
-            name: "Nguyễn Văn A",
-            company: "PepsiCo",
-            phone: "0901 234 567",
-            email: "vana@pepsico.com",
-            revenue: 120000000,
-            status: "Đang hoạt động",
-        },
-        {
-            id: 2,
-            name: "Trần Thị B",
-            company: "Coca-Cola",
-            phone: "0912 345 678",
-            email: "thib@cocacola.com",
-            revenue: 85000000,
-            status: "Tiềm năng",
-        },
-        {
-            id: 3,
-            name: "Lê Văn C",
-            company: "Nestlé",
-            phone: "0987 654 321",
-            email: "vanc@nestle.com",
-            revenue: 45000000,
-            status: "Ngừng giao dịch",
-        },
-    ];
+    // const [search, setSearch] = useState("");
 
     return (
-        <>
-            <h1 style={{ margin: "10px" }}>Khách Hàng</h1>
-            <div className="Client-Profile">
-                <div className="Client-top">
-                    <h4 >Bộ Lọc :</h4>
-                    <a href="#">Loại KH</a>
-                    <a href="#">Khu vực</a>
-                    <a href="#">Ngành hàng</a>
-                    <a href="#">Tag</a>
-
+        <div className="client-page">
+            {/* Header: Gom nhóm tiêu đề và nút bấm chính */}
+            <div className="page-header">
+                <div className="header-title">
+                    <div className="breadcrumb">Dashboard <ChevronRight size={14} /> <span>Khách hàng</span></div>
+                    <h1>Danh sách khách hàng</h1>
                 </div>
-                <div className="Client-mid">
-                    <h4 style={{ margin: "25px" }}>Danh sách khách hàng :</h4>
+                <div className="header-actions">
+                    <button className="btn-secondary"><Download size={18} /> Xuất file</button>
+                    <button className="btn-primary"><UserPlus size={18} /> Thêm khách hàng</button>
+                </div>
+            </div>
+
+            {/* Main Card: Chứa toàn bộ bộ lọc và bảng */}
+            <div className="main-card">
+                <div className="table-toolbar">
+                    <div className="search-wrapper">
+                        <Search className="search-icon" size={18} />
+                        <input type="text" placeholder="Tìm tên khách hàng, mã số thuế..." />
+                    </div>
+                    <div className="filter-wrapper">
+                        <span className="filter-label"><Filter size={16} /> Bộ lọc:</span>
+                        <div className="filter-tags">
+                            <button className="tag active">Tất cả</button>
+                            <button className="tag">Loại KH</button>
+                            <button className="tag">Khu vực</button>
+                            <button className="tag">Ngành hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="table-container">
                     <table>
                         <thead>
-
-
                             <tr>
-                                <th>Tên</th>
-                                <th> công ty</th>
-                                <th>SĐT</th>
-                                <th>Email</th>
-                                <th>Doanh thu</th>
-                                <th colSpan={2}>Trạng Thái</th>
-                                <th></th>
+                                <th>Khách hàng</th>
+                                <th>Công ty</th>
+                                <th className="text-right">Doanh thu</th>
+                                <th className="text-center">Trạng thái</th>
+                                <th className="text-right">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                customers.map((item) => (
-                                    <tr key={item.id}>
-                                        <td>{item.name}</td>
-                                        <td>{item.company}</td>
-                                        <td>{item.phone}</td>
-                                        <td>{item.email}</td>
-                                        <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.revenue)}</td>
-                                        <td><span className={`status-badge ${item.status === "Đang hoạt động" ? "active" : item.status === "Tiềm năng" ? "potential" : "stopped"}`}>{item.status}</span></td>
-                                        <td><div className="action-buttons">
-                                            <button className="btn-edit" title="chỉnh sửa"><Pencil size={18} color="#0046be" /></button>
-                                            <button className="btn-delete" title="xóa"><Trash2 size={18} color="#fa5252" /></button>
-                                            <button className="btn-more"><MoreVertical size={18} color="#999" /></button>
-                                        </div></td>
-                                    </tr>
-                                ))
-                            }
+                            {customers.map((item) => (
+                                <tr key={item.id}>
+                                    <td>
+                                        <div className="customer-cell">
+                                            <div className={`avatar color-${item.id % 4}`}>
+                                                {item.name.charAt(0)}
+                                            </div>
+                                            <div className="info">
+                                                <span className="name">{item.name}</span>
+                                                <span className="sub">{item.phone}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="company-cell">
+                                            <span className="company-name">{item.company}</span>
+                                            <span className="sub">{item.email}</span>
+                                        </div>
+                                    </td>
+                                    <td className="text-right font-bold">
+                                        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.revenue)}
+                                    </td>
+                                    <td className="text-center">
+                                        <span className={`status-pill ${item.status}`}>
+                                            {item.statusText}
+                                        </span>
+                                    </td>
+                                    <td className="text-right">
+                                        <div className="action-group">
+                                            <button className="icon-btn edit" aria-label="Sửa khách hàng"><Pencil size={16} /></button>
+                                            <button className="icon-btn delete" aria-label="Xóa khách hàng"><Trash2 size={16} /></button>
+                                            <button className="icon-btn"><MoreVertical size={16} /></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
+
 export default Client;

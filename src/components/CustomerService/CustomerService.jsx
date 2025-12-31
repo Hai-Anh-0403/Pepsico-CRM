@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CustomerService.css';
-import { Mail, MessageSquare, Phone, SendHorizonal } from 'lucide-react';
+import { Mail, MessageSquare, Phone, SendHorizonal, Bot, User, Settings2, BellRing } from 'lucide-react';
 
 const CustomerService = () => {
     const [messages, setMessages] = useState([
@@ -9,50 +9,116 @@ const CustomerService = () => {
     ]);
 
     return (
-        <div className="crm-container">
-
-            <div className="crm-sidebar">
-                <h3>Kênh Chăm Sóc</h3>
-                <button className="active"><MessageSquare size={20} /> Chatbot AI</button>
-                <button><Mail size={20} /> Email Marketing</button>
-                <button><Phone size={20} /> SMS/Zalo</button>
+        <div className="cs-wrapper">
+            <div className="cs-header-page">
+                <h2>Chăm sóc khách hàng</h2>
+                <p>Quản lý các kênh tương tác và thiết lập kịch bản tự động</p>
             </div>
 
+            <div className="cs-container">
+                {/* 1. Sidebar Kênh Chăm Sóc */}
+                <aside className="cs-sidebar">
+                    <div className="sidebar-section-title">KÊNH TƯƠNG TÁC</div>
+                    <nav className="cs-nav">
+                        <button className="nav-item active">
+                            <MessageSquare size={18} />
+                            <span>Chatbot AI</span>
+                            <span className="badge">New</span>
+                        </button>
+                        <button className="nav-item">
+                            <Mail size={18} />
+                            <span>Email Marketing</span>
+                        </button>
+                        <button className="nav-item">
+                            <Phone size={18} />
+                            <span>SMS / Zalo</span>
+                        </button>
+                    </nav>
+                </aside>
 
-            <div className="crm-main-content">
-                <div className="chat-window">
+                {/* 2. Cửa sổ Chat chính */}
+                <main className="cs-chat-window">
                     <div className="chat-header">
-                        <h4>Hỗ trợ trực tuyến - PepsiCo Vietnam</h4>
-                        <span className="status-online">Hoạt động</span>
+                        <div className="agent-info">
+                            <div className="agent-avatar">
+                                <Bot size={20} color="white" />
+                            </div>
+                            <div>
+                                <h4>Trợ lý ảo PepsiCo</h4>
+                                <div className="status-indicator">
+                                    <span className="dot pulse"></span>
+                                    Hệ thống đang hoạt động
+                                </div>
+                            </div>
+                        </div>
+                        <button className="settings-btn"><Settings2 size={18} /></button>
                     </div>
 
                     <div className="chat-body">
+                        <div className="timestamp">Hôm nay</div>
                         {messages.map((msg) => (
-                            <div key={msg.id} className={`message-item ${msg.sender}`}>
-                                <div className="bubble">{msg.text}</div>
+                            <div key={msg.id} className={`msg-group ${msg.sender}`}>
+                                <div className="msg-avatar">
+                                    {msg.sender === 'bot' ? <Bot size={20} /> : <User size={20} />}
+                                </div>
+                                <div className="msg-bubble">
+                                    {msg.text}
+                                </div>
                             </div>
                         ))}
                     </div>
 
                     <div className="chat-footer">
-                        <input type="text" placeholder="Nhập kịch bản trả lời tự động..." />
-                        <button className="send-btn"><SendHorizonal size={20} /></button>
+                        <div className="input-box">
+                            <input type="text" placeholder="Huấn luyện chatbot: Nhập kịch bản trả lời tại đây..." />
+                            <button className="send-action">
+                                <SendHorizonal size={22} />
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </main>
 
+                {/* 3. Panel cấu hình tự động */}
+                <section className="cs-automation">
+                    <div className="panel-header">
+                        <BellRing size={18} />
+                        <h4>Tự động hóa</h4>
+                    </div>
 
-                <div className="automation-panel">
-                    <h4>Thiết lập Tự động</h4>
-                    <div className="config-item">
-                        <label>Gửi Email chúc mừng sinh nhật:</label>
-                        <input type="checkbox" checked readOnly />
+                    <div className="automation-list">
+                        <div className="auto-card">
+                            <div className="auto-info">
+                                <h5>Mừng sinh nhật</h5>
+                                <p>Gửi Email/SMS tự động</p>
+                            </div>
+                            <label className="switch">
+                                <input type="checkbox" defaultChecked />
+                                <span className="slider"></span>
+                            </label>
+                        </div>
+
+                        <div className="auto-card">
+                            <div className="auto-info">
+                                <h5>Nhắc lịch hàng</h5>
+                                <p>Cảnh báo qua Zalo OA</p>
+                            </div>
+                            <label className="switch">
+                                <input type="checkbox" />
+                                <span className="slider"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div className="config-item">
-                        <label>Nhắc lịch nhập hàng (SMS):</label>
-                        <input type="checkbox" />
+
+                    <div className="usage-stats">
+                        <p>Tin nhắn đã gửi tháng này</p>
+                        <div className="progress-bar">
+                            <div className="progress" style={{ width: '65%' }}></div>
+                        </div>
+                        <span>1,200 / 2,000</span>
                     </div>
-                    <button className="save-config">Lưu cấu hình</button>
-                </div>
+
+                    <button className="save-btn-gradient">Cập nhật cấu hình</button>
+                </section>
             </div>
         </div>
     );

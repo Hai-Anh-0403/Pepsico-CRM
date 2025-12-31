@@ -8,8 +8,14 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
-    CartesianGrid
+    CartesianGrid,
 } from "recharts";
+import {
+    BarChart3,
+    Users,
+    TrendingUp,
+    Percent
+} from "lucide-react";
 
 const revenueData = [
     { month: "Jan", revenue: 1200 },
@@ -20,70 +26,89 @@ const revenueData = [
 ];
 
 const kpiData = [
-    { name: "Khách hàng mới", value: 320 },
-    { name: "Cơ hội bán hàng", value: 85 },
-    { name: "Tỷ lệ chuyển đổi (%)", value: 42 },
+    {
+        name: "Khách hàng mới",
+        value: 320,
+        icon: <Users size={22} />
+    },
+    {
+        name: "Cơ hội bán hàng",
+        value: 85,
+        icon: <TrendingUp size={22} />
+    },
+    {
+        name: "Tỷ lệ chuyển đổi",
+        value: "42%",
+        icon: <Percent size={22} />
+    },
 ];
 
 export default function Report() {
     return (
         <div className="report">
-            {/* Header */}
             <div className="report-header">
                 <h1>Báo cáo & Phân tích kinh doanh</h1>
                 <button className="report-btn">Xuất báo cáo</button>
             </div>
 
-            {/* KPI */}
             <div className="report-kpi">
                 {kpiData.map((kpi, index) => (
-                    <div key={index} className="report-card">
-                        <p className="kpi-name">{kpi.name}</p>
+                    <div
+                        key={index}
+                        className={`report-card kpi-card kpi-${index + 1}`}
+                    >
+                        <div className="kpi-header">
+                            <span className="kpi-icon">{kpi.icon}</span>
+                            <p className="kpi-name">{kpi.name}</p>
+                        </div>
                         <p className="kpi-value">{kpi.value}</p>
                     </div>
                 ))}
             </div>
 
-            {/* Charts */}
             <div className="report-charts">
                 <div className="report-card">
-                    <h2>Doanh thu theo tháng</h2>
-                    <ResponsiveContainer width="100%" height={250}>
+                    <h2 className="card-title">
+                        <BarChart3 size={18} />
+                        Doanh thu theo tháng
+                    </h2>
+                    <ResponsiveContainer width="100%" height={260}>
                         <BarChart data={revenueData}>
+                            <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="month" />
                             <YAxis />
-                            <Tooltip />
-
-                            <Bar dataKey="revenue" fill="#0046be" />
+                            <Tooltip formatter={(v) => `${v.toLocaleString()} $`} />
+                            <Bar dataKey="revenue" fill="var(--primary-color)" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
 
                 <div className="report-card">
-                    <h2>Xu hướng tăng trưởng</h2>
-                    <ResponsiveContainer width="100%" height={250}>
+                    <h2 className="card-title">
+                        <BarChart3 size={18} />
+                        Xu tăng trưởng
+                    </h2>
+                    <ResponsiveContainer width="100%" height={260}>
                         <LineChart data={revenueData}>
-                            <CartesianGrid
-                                stroke="#e0e0e0"
-                                strokeDasharray="4 4"
-                            />
+                            <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="month" />
                             <YAxis />
-                            <Tooltip />
-                            <Line dataKey="revenue"
-                                stroke="#0046be"
-                                strokeWidth={3} />
-
+                            <Tooltip formatter={(v) => `${v.toLocaleString()} $`} />
+                            <Line
+                                type="monotone"
+                                dataKey="revenue"
+                                stroke="var(--primary-color)"
+                                strokeWidth={3}
+                            />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
             </div>
 
-            {/* AI Insight */}
-            <div className="report-card">
+            <div className="report-card ai-card">
                 <h2>Gợi ý chiến lược từ AI</h2>
-                <p>• Doanh thu tăng mạnh vào quý II → nên đẩy mạnh marketing sản phẩm đồ uống.</p>
-                <p>• Tỷ lệ chuyển đổi chưa cao → cần tối ưu quy trình chăm sóc khách hàng.</p>
+                <p>• Doanh thu tăng mạnh vào quý II → nên đẩy mạnh marketing.</p>
+                <p>• Tỷ lệ chuyển đổi chưa cao → cần tối ưu quy trình chăm sóc.</p>
             </div>
         </div>
     );

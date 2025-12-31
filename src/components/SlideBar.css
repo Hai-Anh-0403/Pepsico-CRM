@@ -1,74 +1,104 @@
+:root {
+    --pepsi-blue: #0046be;
+    --pepsi-red: #e32934;
+    --nav-hover: rgba(255, 255, 255, 0.08);
+    --transition: cubic-bezier(0.4, 0, 0.2, 1);
+    /* mượt hơn ease */
+}
+
 .sidebar {
     width: 260px;
-    background-color: #0046be;
-    /* Màu xanh Pepsi đậm hơn chút cho sang */
+    background: linear-gradient(180deg, var(--pepsi-blue) 0%, #00338d 100%);
     color: white;
-    min-height: 100vh;
-    padding: 20px 15px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
 }
 
 .sidebar-header {
-    padding: 10px 15px 30px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding: 32px 24px;
+    gap: 12px;
+    justify-content: center;
+
 }
 
-.sidebar-header h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin: 0;
+.sidebar-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
 }
 
-.sidebar-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.sidebar-footer p {
+    font-size: 12px;
+    color: #ffffff80;
+    font-weight: 300;
 }
 
-.sidebar-menu li {
-    margin-bottom: 8px;
-    /* Tạo khoảng cách giữa các item */
+.logo-title {
+    margin-left: 10px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+    transition: transform 0.3s var(--transition);
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+    color: #fff;
+}
+
+
+
+.text-accent {
+    color: #f9303c;
+    /* Màu đỏ đặc trưng của Pepsi cho chữ CRM */
+    font-weight: 800;
 }
 
 .nav-link {
+    position: relative;
+    /* Để làm vạch active nếu muốn */
+    margin: 4px 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 12px 15px;
-    text-decoration: none;
-    border-radius: 12px;
-    /* Bo góc hiện đại */
-    transition: all 0.3s ease;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.25s var(--transition);
 }
 
-.nav-link .icon {
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-}
-
-.nav-link .label {
-    font-weight: 500;
-    font-size: 0.95rem;
-}
-
-/* Hiệu ứng Hover */
-.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    transform: translateX(5px);
-    /* Nhích nhẹ sang phải khi hover */
-}
-
-/* Trạng thái Active */
+/* Hiệu ứng khi Active: chữ xanh trên nền trắng */
 .nav-link.active {
-    background-color: #ffffff;
-    color: #0046be;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    color: var(--pepsi-blue);
+    font-weight: 600;
 }
 
-.nav-link.active .icon {
-    color: #0046be;
+/* Thêm icon mũi tên nhỏ bên phải, chỉ hiện khi hover hoặc active */
+.arrow-icon {
+    margin-left: auto;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.nav-link:hover .arrow-icon,
+.nav-link.active .arrow-icon {
+    opacity: 1;
+}
+
+.nav-link:hover:not(.active) {
+    background-color: var(--nav-hover);
+    color: #fff;
 }

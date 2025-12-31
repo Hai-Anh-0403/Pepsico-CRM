@@ -1,15 +1,10 @@
-#root {
-  width: 100%;
-
-  text-align: center;
-}
-
 :root {
-  /* Đặt tên gợi nhớ đến thương hiệu Pepsi */
   --pepsi-blue: #0046be;
   --pepsi-red: #e32221;
   --bg-light: #f4f7fe;
   --text-main: #333333;
+  --sidebar-width: 260px;
+  /* Định nghĩa chiều rộng sidebar để dễ quản lý */
 }
 
 * {
@@ -18,59 +13,84 @@
   box-sizing: border-box;
 }
 
+/* Quan trọng: Reset lại #root để Flexbox hoạt động đúng */
+#root {
+  width: 100%;
+  text-align: left;
+  /* Đổi từ center sang left */
+}
+
+/* Container chính */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar: Bạn hãy đảm bảo Component SlideBar có bao ngoài bởi class này */
+.sidebar-container {
+  width: var(--sidebar-width);
+  background-color: var(--pepsi-blue);
+  color: white;
+  flex-shrink: 0;
+  /* Không cho phép sidebar bị co lại */
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Khối bên phải chứa Header và Nội dung */
+.main-wrapper {
+  flex: 1;
+  /* Tự động chiếm hết phần còn lại */
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Header nằm trong main-wrapper nên nó sẽ tự động bị đẩy sang phải */
+.header-container {
+  height: 64px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  /* Sticky để header luôn ở trên cùng khi cuộn nội dung */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Vùng hiển thị nội dung của Routes */
+.content-area {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Giữ lại các hiệu ứng cũ của bạn nếu cần dùng */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
+  height: 4em;
+  padding: 1em;
   transition: filter 300ms;
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  filter: drop-shadow(0 0 2em var(--pepsi-blue));
 }
 
 .title {
-  color: black;
+  color: var(--text-main);
+  font-weight: 600;
 }
 
-.app-container {
-  display: flex;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-
-
-}
-
-.main-content {
-  flex: 1;
-  padding: 20px;
-  background-color: #f7f8fa;
+/* Responsive: Trên màn hình nhỏ, có thể ẩn sidebar hoặc chuyển chế độ */
+@media (max-width: 768px) {
+  .sidebar-container {
+    display: none;
+    /* Hoặc ẩn để làm menu mobile */
+  }
 }

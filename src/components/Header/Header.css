@@ -1,0 +1,259 @@
+:root {
+    --pepsi-blue: #004b7c;
+    --text-main: #333;
+    --text-gray: #666;
+    --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.header {
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   3. Logo / Back button
+========================= */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pepsi-blue);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+/* =========================
+   4. Search
+========================= */
+.search-container {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 40px;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    border: 1.5px solid #e0e0e0;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.search-container input:focus {
+    border-color: var(--pepsi-blue);
+    box-shadow: 0 0 0 2px rgba(0, 75, 124, 0.15);
+}
+
+.search-container button {
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    background: var(--pepsi-blue);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.search-container button:hover {
+    background: #003559;
+}
+
+/* =========================
+   5. User Section
+========================= */
+.user-section {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Trigger */
+.user-wrapper {
+    position: relative;
+}
+
+.user-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.user-trigger:hover {
+    background: #f5f5f5;
+}
+
+.user-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--pepsi-blue);
+    white-space: nowrap;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   6. Dropdown Profile
+========================= */
+.mini-profile {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 260px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow-soft);
+    padding: 16px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition-smooth);
+    z-index: 1000;
+}
+
+/* Hover show dropdown */
+.user-wrapper:hover .mini-profile {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Invisible hover bridge */
+.mini-profile::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+}
+
+/* Profile header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-header h4 {
+    font-size: 16px;
+    color: var(--pepsi-blue);
+}
+
+.profile-header span {
+    font-size: 13px;
+    color: var(--text-gray);
+}
+
+/* Divider */
+.mini-profile hr {
+    margin: 12px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Profile body */
+.profile-body p {
+    font-size: 13px;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+/* Logout button */
+.btn-logout {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 0;
+    border: none;
+    border-radius: 20px;
+    background: var(--pepsi-blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-logout:hover {
+    background: #003559;
+}
+
+/* =========================
+   7. Login Button
+========================= */
+.btn-login {
+    text-decoration: none;
+    padding: 8px 20px;
+    background: var(--pepsi-blue);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-login:hover {
+    background: #003559;
+    box-shadow: 0 4px 12px rgba(0, 75, 124, 0.3);
+}
+
+/* =========================
+   8. Responsive
+========================= */
+@media (max-width: 768px) {
+    .search-container {
+        margin: 0 10px;
+    }
+
+    .user-name {
+        display: none;
+    }
+}
