@@ -1,82 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Buy.css";
-import { Bell, Mail, RefreshCcw, Settings } from "lucide-react"
-import Item from "./item";
-import Classic from '../Buy/classic.png';
-import Lays from '../Buy/Lays.png';
-import Fanta from '../Buy/Fanta.png'
-function Buy() {
+import { Bell, Mail, Settings, RefreshCcw } from "lucide-react";
+import Item from "./Item";
+import Classic from "../Buy/classic.png";
+import Lays from "../Buy/Lays.png";
+import Fanta from "../Buy/Fanta.png";
+import UserAvatar from "../../assets/img/user.png";
+
+const kpis = [
+    {
+        id: 1,
+        title: "Doanh thu hôm nay",
+        value: "350,5 triệu ₫",
+        note: "+15,2% so với hôm qua",
+        type: "revenue",
+    },
+    {
+        id: 2,
+        title: "Đại lý hoạt động",
+        value: "321",
+        note: "+12 đại lý mới",
+        type: "customers",
+    },
+    {
+        id: 3,
+        title: "Đơn hàng chờ xử lý",
+        value: "128",
+        note: "Cần xử lý trong hôm nay",
+        type: "orders",
+    },
+];
+
+const products = [
+    {
+        id: 1,
+        title: "Pepsi Classic",
+        price: "25.000 VND",
+        sold: "1.240 thùng",
+        growth: "+12%",
+        img: Classic,
+    },
+    {
+        id: 2,
+        title: "Lays",
+        price: "10.000 VND",
+        sold: "980 thùng",
+        growth: "+8%",
+        img: Lays,
+    },
+    {
+        id: 3,
+        title: "Fanta",
+        price: "20.000 VND",
+        sold: "760 thùng",
+        growth: "+5%",
+        img: Fanta,
+    },
+];
+
+export default function Buy() {
+    const [keyword, setKeyword] = useState("");
+
     return (
         <div className="container">
-
             {/* Header */}
-            <header className="header">
-                <input type="text" placeholder="Tìm kiếm doanh mục..." />
-                <div className="icons">
-                    <span><Bell size={20} /></span>
-                    <span><Mail size={20} /></span>
-                    <span><Settings size={20} /></span>
+            <header className="sales-header">
+                <input
+                    type="text"
+                    placeholder="Tìm sản phẩm, đại lý, đơn hàng..."
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                />
+
+                <div className="header-right">
+                    <div className="icons">
+                        <Bell size={20} />
+                        <Mail size={20} />
+                        <Settings size={20} />
+                    </div>
+                    <div className="user">
+                        <img src={UserAvatar} alt="user" />
+                        <span>Sales Admin</span>
+                    </div>
                 </div>
             </header>
 
-            {/* Filter Bar */}
+            {/* Filter */}
             <div className="filter-bar">
                 <div className="filter-group">
                     <select>
-                        <option>Sản phẩm bán chạy</option>
-                        <option>Sản phẩm được yêu thích</option>
-                        <option>Đánh giá sản phẩm</option>
+                        <option>Khu vực: Toàn quốc</option>
+                        <option>Miền Bắc</option>
+                        <option>Miền Trung</option>
+                        <option>Miền Nam</option>
                     </select>
                     <select>
-                        <option>Mới nhất</option>
-                        <option>Tháng trước</option>
+                        <option>Kênh bán: GT</option>
+                        <option>MT</option>
+                        <option>Online</option>
                     </select>
                 </div>
-                <button className="refresh-btn"><  RefreshCcw size={20} /></button>
+                <button className="refresh-btn">
+                    <RefreshCcw size={18} />
+                </button>
             </div>
 
-            {/* Stats */}
+            {/* KPI */}
             <section className="stats">
-                <div className="card revenue">
-                    <h3>Doanh thu</h3>
-                    <p className="value">350,5 triệu ₫</p>
-                    <span>+15,2% so với hôm qua</span>
-                </div>
-
-                <div className="card customers">
-                    <h3>Khách hàng</h3>
-                    <p className="value">321</p>
-                    <span>+92 khách</span>
-                </div>
-
-                <div className="card orders">
-                    <h3>Đơn hàng</h3>
-                    <p className="value">1,250</p>
-                    <span>+8,4% so với hôm qua</span>
-                </div>
+                {kpis.map((item) => (
+                    <div key={item.id} className={`card ${item.type}`}>
+                        <h3>{item.title}</h3>
+                        <p className="value">{item.value}</p>
+                        <span>{item.note}</span>
+                    </div>
+                ))}
             </section>
 
             {/* Content */}
             <div className="content">
-                <section className="box">
+                <section className="product-box">
                     <h2>Sản phẩm bán chạy</h2>
-
-                    <Item title="Pepsi classic" price="25.000 VND" img={Classic} />
-                    <Item title="Lays" price="10.000 VND" img={Lays} />
-                    <Item title="Fanta" price="20.000 VND" img={Fanta} />
+                    {products.map((p) => (
+                        <Item key={p.id} {...p} />
+                    ))}
                 </section>
 
-                <aside className="review-box">
-                    <h3>Đánh giá sản phẩm</h3>
-                    <div className="rating-score">
-                        <span className="score">4.6</span>
-                        <div className="stars">★★★★★</div>
-                        <p>1.248 đánh giá</p>
-                    </div>
+                <aside className="insight-box">
+                    <h3>Insight bán hàng</h3>
+                    <ul>
+                        <li>🔥 Pepsi Classic tăng trưởng mạnh nhất tuần</li>
+                        <li>⚠️ Fanta có tỷ lệ trả hàng cao tại MT</li>
+                        <li>✅ Lays đạt 92% chỉ tiêu tháng</li>
+                    </ul>
                 </aside>
             </div>
         </div>
     );
 }
-
-export default Buy;
