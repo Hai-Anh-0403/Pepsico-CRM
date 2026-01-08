@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import SlideBar from "./components/SlideBar";
-import Dashboard from "./components/Dashboard";
+import SlideBar from "./components/Slidebar/SlideBar.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Client from "./components/Nav/Client";
 import Header from "./components/Header/Header.jsx";
-import Login from "./components/Login/Login";
-import Report from "./components/Report/Report.jsx";
-import Settings from "./components/Setting/Settings.jsx";
+import Login from "./pages/Login/Login.jsx";
+import Report from "./pages/Report/Report.jsx";
+import Settings from "./pages/Setting/Settings.jsx";
 import AIChat from "./components/AiChat/AIchat.jsx";
-import CustomerService from "./components/CustomerService/CustomerService.jsx";
-import Buy from "./components/Buy/Buy.jsx";
+import CustomerService from "./pages/CustomerService/CustomerService.jsx";
+import Buy from "./pages/Buy/Buy.jsx";
 import "./App.css";
 
 function Layout() {

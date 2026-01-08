@@ -1,7 +1,7 @@
 import React from "react";
-import KPI from "./KPI";
-import Chart from "./Chart/Chart.jsx";
-import PieChartComponent from "./Chart/PieChart.jsx";
+import KPI from "../KPI/KPI.jsx";
+import Chart from "../Chart/Chart.jsx";
+import PieChartComponent from "../Chart/PieChart.jsx";
 import { DollarSign, UserPlus, Target, BarChart2 } from 'lucide-react';
 import "./Dashboard.css";
 

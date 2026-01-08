@@ -1,7 +1,7 @@
 // Sidebar.jsx
 import "./SlideBar.css";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/img/P.png";
+import Logo from "../../assets/img/P.png";
 import { LayoutDashboard, Users, ShoppingCart, Headset, MessageSquare, BarChart3, Settings, ChevronRight, Earth } from 'lucide-react';
 
 const menuItems = [
