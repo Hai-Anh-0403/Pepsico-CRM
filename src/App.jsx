@@ -7,33 +7,72 @@ import Login from "./pages/Login/Login.jsx";
 import Report from "./pages/Report/Report.jsx";
 import Settings from "./pages/Setting/Settings.jsx";
 import AIChat from "./components/AiChat/AIchat.jsx";
+import Register from "./pages/Register/Register.jsx";
 import CustomerService from "./pages/CustomerService/CustomerService.jsx";
 import Buy from "./pages/Buy/Buy.jsx";
+
+import { AuthProvider } from "./context/Authcontext.jsx";
+import PrivateRoute from "./routers/PrivateRouter.jsx";
+
 import "./App.css";
 
 function Layout() {
     const location = useLocation();
-    const isLoginPage = location.pathname === "/login";
+    const isLoginPage = location.pathname === "/login"
+        || location.pathname === "/register";
 
     return (
         <div className={`app-container ${isLoginPage ? "login-mode" : ""}`}>
-            {/* 1. Sidebar bên trái */}
             {!isLoginPage && <SlideBar />}
 
-            {/* 2. Khối bên phải (Wrapper cho Header và Content) */}
             <div className="main-wrapper">
                 {!isLoginPage && <Header />}
 
                 <main className="content-area">
                     <Routes>
                         <Route path="/login" element={<Login />} />
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/client" element={<Client />} />
-                        <Route path="/report" element={<Report />} />
-                        <Route path="/buy" element={<Buy />} />
-                        <Route path="/setting" element={<Settings />} />
-                        <Route path="/ai" element={<AIChat />} />
-                        <Route path="/customerservice" element={<CustomerService />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/" element={
+                            <PrivateRoute>
+                                <Dashboard />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/client" element={
+                            <PrivateRoute>
+                                <Client />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/report" element={
+                            <PrivateRoute>
+                                <Report />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/buy" element={
+                            <PrivateRoute>
+                                <Buy />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/setting" element={
+                            <PrivateRoute>
+                                <Settings />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/ai" element={
+                            <PrivateRoute>
+                                <AIChat />
+                            </PrivateRoute>
+                        } />
+
+                        <Route path="/customerservice" element={
+                            <PrivateRoute>
+                                <CustomerService />
+                            </PrivateRoute>
+                        } />
                     </Routes>
                 </main>
             </div>
@@ -44,7 +83,9 @@ function Layout() {
 function App() {
     return (
         <BrowserRouter>
-            <Layout />
+            <AuthProvider>
+                <Layout />
+            </AuthProvider>
         </BrowserRouter>
     );
 }
